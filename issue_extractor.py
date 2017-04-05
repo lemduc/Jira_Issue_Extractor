@@ -13,7 +13,7 @@ options = {
     'server': 'https://issues.apache.org/jira/'
 }
 
-project_name = "Nutch"
+project_name = "Lucene - Core"
 
 
 ###########################################################
@@ -109,34 +109,34 @@ for issue in issues:
         exportedData.update(allaffectversion)
         exportedData.update(allfixversion)
 
-        # DEV_STATUS = 'https://issues.apache.org/jira/rest/dev-status/1.0'
-        # _issue = 'issue/detail?issueId=%s' % issue.id
-        # _args = 'applicationType=fecru&dataType=repository&_=%s' % int(time.time())
-        # req_url = '%s/%s&%s' % (DEV_STATUS, _issue, _args)
-        # response = sess_get(req_url)
-        # raw_data = json.loads(response.content.decode('utf-8'))
-        # # print(issue)
-        # # print(issue.key)
-        # # print(raw_data)
-        # try:
-        #     hasCommit = True
-        #     commits = raw_data['detail'][0]['repositories'][0]['commits']
-        #     # storeIssues.append(response.content.decode('utf-8'))
-        # except IndexError:
-        #     hasCommit = False
-        # if hasCommit:
-        #     commitList = []
-        #     for commit in commits:
-        #         # print(req)
-        #         # print(issue.id)
-        #         patches = []
-        #         # print('%s\n%s\n\n' % (req['displayId'], req['files']))
-        #         for file in commit['files']:
-        #             patches.append({'filename': file['path']})
-        #         commitList.append({'files': patches})
-        #         # print(patches)
-        #     exportedData.update({'commits': commitList})
-        #     storeIssues.append(exportedData)
+        DEV_STATUS = 'https://issues.apache.org/jira/rest/dev-status/1.0'
+        _issue = 'issue/detail?issueId=%s' % issue.id
+        _args = 'applicationType=fecru&dataType=repository&_=%s' % int(time.time())
+        req_url = '%s/%s&%s' % (DEV_STATUS, _issue, _args)
+        response = sess_get(req_url)
+        raw_data = json.loads(response.content.decode('utf-8'))
+        # print(issue)
+        # print(issue.key)
+        # print(raw_data)
+        try:
+            hasCommit = True
+            commits = raw_data['detail'][0]['repositories'][0]['commits']
+            # storeIssues.append(response.content.decode('utf-8'))
+        except IndexError:
+            hasCommit = False
+        if hasCommit:
+            commitList = []
+            for commit in commits:
+                # print(req)
+                # print(issue.id)
+                patches = []
+                # print('%s\n%s\n\n' % (req['displayId'], req['files']))
+                for file in commit['files']:
+                    patches.append({'filename': file['path']})
+                commitList.append({'files': patches})
+                # print(patches)
+            exportedData.update({'commits': commitList})
+            storeIssues.append(exportedData)
         hasCommit = False
         # if doesn't has commit, then find by pull request
         if not hasCommit:
