@@ -46,7 +46,7 @@ def analyze_commit(sha, commit_message):
 
 
 
-with open('data/compare_7_8_local.txt', encoding="utf8") as data_file:
+with open('data/compare_6_7_local.txt', encoding="utf8") as data_file:
     data = data_file.readlines()
 
 print(len(data))
@@ -63,4 +63,4 @@ for commit in data[:]:
 
 #print(mapping_bug_file)
 os.chdir(current_dir)
-pickle.dump(mapping_bug_file, open("bug_file_mapping.p", "wb"))
+pickle.dump(mapping_bug_file, open("output/bug_file_mapping_6_7.p", "wb"))
