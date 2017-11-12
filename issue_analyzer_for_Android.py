@@ -1,5 +1,7 @@
 import pickle
 import pandas as pd
+from scipy import stats
+import numpy
 
 bug_file_mapping = pickle.load(open('output/bug_file_mapping_6_7.p', 'rb'))
 print((len(bug_file_mapping)))
@@ -9,6 +11,7 @@ print((len(bug_file_mapping)))
 def convertClassName(file_name):
     if '$' in file_name:
         return file_name.split('$')[0]
+
     else:
         return file_name
 
@@ -47,6 +50,9 @@ total_java = 0
 total_non_java = 0
 total_smelly_java = 0
 
+non_smell_issue_set = set()
+smell_issue_set = set()
+
 for key in bug_file_mapping.keys():
     has_smell = False
     file_list = bug_file_mapping[key]
@@ -61,6 +67,54 @@ for key in bug_file_mapping.keys():
 
     if has_smell:
         smelly_issue += 1
+        smell_issue_set.add(key)
+    else:
+        non_smell_issue_set.add(key)
+
+count_file_smell = list()
+count_file_non_smell = list()
+
+for key in smell_issue_set:
+    c = 0
+    for file in bug_file_mapping[key]:
+        if file.endswith('java'):
+            c += 1
+    count_file_smell.append(c)
+
+for key in non_smell_issue_set:
+    c = 0
+    for file in bug_file_mapping[key]:
+        if file.endswith('java'):
+            c += 1
+    count_file_non_smell.append(c)
+
+st =  stats.ttest_ind(count_file_smell, count_file_non_smell)
+
+count_issue_per_smelly_file = dict()
+count_issue_per_non_smelly_file = dict()
+
+for issue in smell_issue_set:
+    for file in bug_file_mapping[issue]:
+        if file not in count_issue_per_smelly_file.keys():
+            count_issue_per_smelly_file[file] = 0
+        count_issue_per_smelly_file[file] += 1
+
+for issue in non_smell_issue_set:
+    for file in bug_file_mapping[issue]:
+        if file not in count_issue_per_non_smelly_file.keys():
+            count_issue_per_non_smelly_file[file] = 0
+        count_issue_per_non_smelly_file[file] += 1
+
+s = list()
+n = list()
+
+for key in count_issue_per_smelly_file.keys():
+    s.append(count_issue_per_smelly_file[key])
+
+for key in count_issue_per_non_smelly_file.keys():
+    n.append(count_issue_per_non_smelly_file[key])
+
+st2 =  stats.ttest_ind(count_file_smell, count_file_non_smell)
 
 print('total: ' + str(total_issue))
 print('smelly: ' + str(smelly_issue))
@@ -70,3 +124,12 @@ print('total java: ' + str(total_java))
 print('total non java: ' + str(total_non_java))
 print('smelly java: ' + str(total_smelly_java))
 
+print('Question 1:')
+print('p-value:' + str(st))
+print('mean smell:' + str(numpy.mean(count_file_smell)))
+print('non mean smell:' + str(numpy.mean(count_file_non_smell)))
+
+print('Question 2:')
+print('p-value:' + str(st2))
+print('mean smell:' + str(numpy.mean(s)))
+print('non mean smell:' + str(numpy.mean(n)))
