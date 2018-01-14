@@ -3,7 +3,7 @@ import pandas as pd
 from scipy import stats
 import numpy
 
-bug_file_mapping = pickle.load(open('output/bug_file_mapping_6_7.p', 'rb'))
+bug_file_mapping = pickle.load(open('output/bug_file_mapping_7_8.p', 'rb'))
 print((len(bug_file_mapping)))
 
 #dict
@@ -93,17 +93,24 @@ st =  stats.ttest_ind(count_file_smell, count_file_non_smell)
 count_issue_per_smelly_file = dict()
 count_issue_per_non_smelly_file = dict()
 
+commit_set_per_smelly_file = dict()
+commit_set_per_non_smelly_file = dict()
+
 for issue in smell_issue_set:
     for file in bug_file_mapping[issue]:
         if file not in count_issue_per_smelly_file.keys():
             count_issue_per_smelly_file[file] = 0
+            commit_set_per_smelly_file[file] = set()
         count_issue_per_smelly_file[file] += 1
+        commit_set_per_smelly_file[file].add(issue)
 
 for issue in non_smell_issue_set:
     for file in bug_file_mapping[issue]:
         if file not in count_issue_per_non_smelly_file.keys():
             count_issue_per_non_smelly_file[file] = 0
+            commit_set_per_non_smelly_file[file] = set()
         count_issue_per_non_smelly_file[file] += 1
+        commit_set_per_non_smelly_file[file].add(issue)
 
 s = list()
 n = list()
@@ -133,3 +140,29 @@ print('Question 2:')
 print('p-value:' + str(st2))
 print('mean smell:' + str(numpy.mean(s)))
 print('non mean smell:' + str(numpy.mean(n)))
+
+
+s = [(k, count_issue_per_smelly_file[k]) for k in sorted(count_issue_per_smelly_file, key=count_issue_per_smelly_file.get, reverse=True)]
+ns = [(k, count_issue_per_non_smelly_file[k]) for k in sorted(count_issue_per_non_smelly_file, key=count_issue_per_non_smelly_file.get, reverse=True)]
+
+count = 0
+for file in s:
+    if file[0].endswith('java'):
+        count += 1
+    else:
+        continue
+    if count > 10:
+        break
+    print(file)
+    # for iss in commit_set_per_smelly_file[file[0]]:
+    #     print (iss)
+
+count = 0
+for file in ns:
+    if file[0].endswith('java'):
+        count += 1
+    else:
+        continue
+    if count > 10:
+        break
+    print(file)
