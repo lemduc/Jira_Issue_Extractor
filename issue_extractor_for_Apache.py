@@ -13,7 +13,8 @@ options = {
     'server': 'https://issues.apache.org/jira/'
 }
 
-project_name = "Lucene - Core"
+#project_name = "Lucene - Core"
+project_name = "Struts 2"
 
 
 ###########################################################
@@ -33,15 +34,15 @@ for p in projects:
 issues = []
 
 keepCrawling = True
-i = 5
+i = 0
 while keepCrawling:
     tmp = jira.search_issues('project=' + project.key + ' AND status in (Resolved, Closed) AND resolution=Fixed',
-                             startAt=i, maxResults=100)
+                             startAt=i, maxResults=5)
     print('.', end="")
     if (len(tmp) > 0):
         issues.extend(tmp)
         i = i + 100
-        #keepCrawling = False #temple limitation
+        keepCrawling = False #temple limitation
     else:
         keepCrawling = False
 
