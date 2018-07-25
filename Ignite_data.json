@@ -1,0 +1,84 @@
+[
+  {
+    "issue_id": "IGNITE-9080",
+    "affect": "",
+    "fix": "2.7",
+    "priority": "Major",
+    "type": "Bug",
+    "time": 4341,
+    "all_affect": "",
+    "all_fix": "2.7",
+    "commits": [
+      {
+        "files": [
+          {
+            "filename": "modules/core/src/test/java/org/apache/ignite/internal/processors/cache/persistence/standbycluster/AbstractNodeJoinTemplate.java"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "issue_id": "IGNITE-9070",
+    "affect": "",
+    "fix": "2.7",
+    "priority": "Major",
+    "type": "Task",
+    "time": 908,
+    "all_affect": "",
+    "all_fix": "2.7",
+    "commits": []
+  },
+  {
+    "issue_id": "IGNITE-9069",
+    "affect": "",
+    "fix": "2.7",
+    "priority": "Major",
+    "type": "Bug",
+    "time": 72086,
+    "all_affect": "",
+    "all_fix": "2.7",
+    "commits": [
+      {
+        "files": [
+          {
+            "filename": "modules/hadoop/src/test/java/org/apache/ignite/internal/processors/hadoop/impl/igfs/IgniteHadoopFileSystemAbstractSelfTest.java"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "issue_id": "IGNITE-9066",
+    "affect": "",
+    "fix": "2.7",
+    "priority": "Major",
+    "type": "Task",
+    "time": 2112,
+    "all_affect": "",
+    "all_fix": "2.7",
+    "commits": []
+  },
+  {
+    "issue_id": "IGNITE-9063",
+    "affect": "2.6",
+    "fix": "2.7",
+    "priority": "Blocker",
+    "type": "Bug",
+    "time": 81624,
+    "all_affect": "2.6",
+    "all_fix": "2.7",
+    "commits": [
+      {
+        "files": [
+          {
+            "filename": "modules/spark/src/main/scala/org/apache/ignite/spark/impl/package.scala"
+          },
+          {
+            "filename": "modules/spark/src/test/scala/org/apache/ignite/spark/AbstractDataFrameSpec.scala"
+          }
+        ]
+      }
+    ]
+  }
+]

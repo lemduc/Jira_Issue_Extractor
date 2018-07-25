@@ -15,7 +15,8 @@ options = {
 
 #project_name = "Lucene - Core"
 #project_name = "Struts 2"
-project_name = "Oozie"
+#project_name = "Oozie"
+project_name = "Ignite"
 
 
 ###########################################################
@@ -152,12 +153,12 @@ for issue in issues:
 
             # find by regular expression
             pull_request = re.compile('https:\/\/github.com\/apache\/'+project_name.lower()+'\/pull\/[0-9]*')
-            matched = pull_request.findall(raw_data['panels']['leftPanels'][2]['html'])
+            matched = pull_request.findall(raw_data['panels']['leftPanels'][3]['html'])
             if matched is not None and len(matched) != 0:
                 pull_requests = set(matched);
                 commitList = []
                 for link in pull_requests:
-                    githubLink = str(link).replace('https://github.com/', 'https://api.github.com/repos/').replace('pull', 'pulls')+'/files' + '?access_token=b1077655202a74c42d8ee5145c154b14a7db07e9';
+                    githubLink = str(link).replace('https://github.com/', 'https://api.github.com/repos/').replace('pull', 'pulls')+'/files' # + '?access_token=b1077655202a74c42d8ee5145c154b14a7db07e9';
                     print(githubLink)
                     related_files = requests.get(githubLink).json();
                     patches = []
