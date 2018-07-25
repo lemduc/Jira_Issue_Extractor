@@ -14,7 +14,8 @@ options = {
 }
 
 #project_name = "Lucene - Core"
-project_name = "Struts 2"
+#project_name = "Struts 2"
+project_name = "Oozie"
 
 
 ###########################################################
@@ -36,17 +37,16 @@ issues = []
 keepCrawling = True
 i = 0
 while keepCrawling:
-    tmp = jira.search_issues('project=' + project.key + ' AND status in (Resolved, Closed) AND resolution=Fixed',
-                             startAt=i, maxResults=5)
+    tmp = jira.search_issues('project=' + project.key  + ' AND status in (Resolved, Closed) AND resolution=Fixed',
+                             startAt=i, maxResults=5) #should set to 50 which is Jira's limitation for 1 request. For testing purpose, can set to 5
     print('.', end="")
     if (len(tmp) > 0):
         issues.extend(tmp)
-        i = i + 100
-        keepCrawling = False #temple limitation
+        i = i + 50
+        keepCrawling = False #temporal limitation for testing, should set to True for real running
     else:
         keepCrawling = False
 
-# Jira on Apache has a limitation of 100
 print('Total number of issues: ' + str(len(issues)))
 
 ###########################################################
@@ -173,8 +173,8 @@ for issue in issues:
                 if not hasCommit and not hasPullRequest:
                     # try to look for patch file
                     # find by regular expression
-                    patch_file = re.compile('https:\/\/issues.apache.org\/jira\/secure\/attachment\/[0-9]*\/[^.]+.patch')
-                    matched = patch_file.findall(raw_data['panels']['leftPanels'][2]['html'])
+                    patch_file = re.compile('https:\/\/issues.apache.org\/jira\/secure\/attachment\/[0-9]*\/[^.]+[.]*[0-9]*.patch')
+                    matched = patch_file.findall(raw_data['panels']['leftPanels'][3]['html'])
                     java_file_pattern = re.compile('[^ ]+\.java');
                     if matched is not None:
                         commitList = []
@@ -198,7 +198,7 @@ for issue in issues:
 with open(project_name + '_data.json', 'w') as outfile:
     json.dump(storeIssues, outfile)
 
-    # print(issues)
+    print(issues)
 
     # issue = jira.issue('JRA-9')
     # print(issue.fields.project.key)             # 'JRA'

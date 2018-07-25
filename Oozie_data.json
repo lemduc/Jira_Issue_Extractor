@@ -1,0 +1,116 @@
+[
+  {
+    "issue_id": "OOZIE-3306",
+    "affect": "5.1.0",
+    "fix": "5.1.0",
+    "priority": "Minor",
+    "type": "Improvement",
+    "time": 5987,
+    "all_affect": "5.1.0",
+    "all_fix": "5.1.0",
+    "commits": [
+      {
+        "files": [
+          {
+            "filename": "<maven.javadoc.opts>-Xdoclint:all</maven.java"
+          },
+          {
+            "filename": "<maven.test.java"
+          },
+          {
+            "filename": "-XX:+UseConcMarkSweepGC</maven.test.java"
+          }
+        ]
+      },
+      {
+        "files": [
+          {
+            "filename": "<maven.javadoc.opts>-Xdoclint:all</maven.java"
+          },
+          {
+            "filename": "<maven.test.java"
+          },
+          {
+            "filename": "-XX:+UseConcMarkSweepGC</maven.test.java"
+          }
+        ]
+      },
+      {
+        "files": [
+          {
+            "filename": "<maven.javadoc.opts>-Xdoclint:all</maven.java"
+          },
+          {
+            "filename": "<maven.test.java"
+          },
+          {
+            "filename": "-XX:+UseConcMarkSweepGC</maven.test.java"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "issue_id": "OOZIE-3297",
+    "affect": "5.0.0",
+    "fix": "5.1.0",
+    "priority": "Critical",
+    "type": "Bug",
+    "time": 63350,
+    "all_affect": "5.0.0",
+    "all_fix": "5.1.0",
+    "commits": [
+      {
+        "files": [
+          {
+            "filename": "core/src/main/java/org/apache/oozie/executor/jpa/BulkJPAExecutor.java"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "issue_id": "OOZIE-3295",
+    "affect": "",
+    "fix": "5.1.0",
+    "priority": "Major",
+    "type": "Sub-task",
+    "time": 23435,
+    "all_affect": "",
+    "all_fix": "5.1.0",
+    "commits": [
+      {
+        "files": [
+          {
+            "filename": "b/core/src/test/java/org/apache/oozie/sla/TestSLACalculatorMemory.java"
+          },
+          {
+            "filename": "a/core/src/test/java/org/apache/oozie/sla/TestSLACalculatorMemory.java"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "issue_id": "OOZIE-3294",
+    "affect": "4.2.0",
+    "fix": "",
+    "priority": "Major",
+    "type": "Bug",
+    "time": 68120,
+    "all_affect": "4.2.0",
+    "all_fix": "",
+    "commits": []
+  },
+  {
+    "issue_id": "OOZIE-3292",
+    "affect": "",
+    "fix": "5.1.0",
+    "priority": "Major",
+    "type": "Sub-task",
+    "time": 16670,
+    "all_affect": "",
+    "all_fix": "5.1.0",
+    "commits": []
+  }
+]
