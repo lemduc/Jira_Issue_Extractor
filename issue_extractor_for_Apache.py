@@ -16,8 +16,13 @@ options = {
 #project_name = "Lucene - Core"
 #project_name = "Struts 2"
 #project_name = "Oozie"
-project_name = "Ignite"
-
+#project_name = "Ignite"
+#project_name = "Pig"
+#project_name = "Apache NiFi"
+#project_name = "Apache Storm"
+#project_name = "Tajo"
+#project_name = "Zeppelin"
+project_name = "ZooKeeper"
 
 ###########################################################
 # Find the list of isues #
@@ -39,12 +44,12 @@ keepCrawling = True
 i = 0
 while keepCrawling:
     tmp = jira.search_issues('project=' + project.key  + ' AND status in (Resolved, Closed) AND resolution=Fixed',
-                             startAt=i, maxResults=5) #should set to 50 which is Jira's limitation for 1 request. For testing purpose, can set to 5
+                             startAt=i, maxResults=50) #should set to 50 which is Jira's limitation for 1 request. For testing purpose, can set to 5
     print('.', end="")
     if (len(tmp) > 0):
         issues.extend(tmp)
         i = i + 50
-        keepCrawling = False #temporal limitation for testing, should set to True for real running
+        keepCrawling = True #temporal limitation for testing, should set to True for real running
     else:
         keepCrawling = False
 
